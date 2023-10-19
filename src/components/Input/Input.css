@@ -1,0 +1,44 @@
+.container {
+  position: relative;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 5px;
+}
+
+.floating-label {
+  font-size: 13px;
+  font-weight: normal;
+  position: absolute;
+  pointer-events: none;
+  left: 15px;
+  top: 9px;
+  padding: 0 5px;
+  background: #fff;
+  transition: 0.2s ease all;
+  opacity: 0.6;
+}
+
+.floating-input {
+  font-size: 12px;
+  display: block;
+  width: 100%;
+  outline: none;
+  height: 36px;
+  padding: 0 20px;
+  background: #fff;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+.floating-input:not(:placeholder-shown) ~ .floating-label,
+.floating-input:focus ~ .floating-label {
+  opacity: 1;
+  top: -8px;
+  font-size: 13px;
+}
+.input-message {
+  color: red;
+}
