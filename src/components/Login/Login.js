@@ -24,20 +24,23 @@ const Login = () => {
   });
   const loginMutation = useMutation(apiLogin, {
     onSuccess: (data) => {
+      if (data) {
+        Swal.fire("Congratulation", "Login successfully", "success");
+      } else {
+        Swal.fire("Error", "Login failed", "error");
+      }
       console.log("Login successful", data);
       // localStorage.setItem("accessToken", data.token);
     },
 
     onError: (error) => {
       console.error("Login failed", error);
+      Swal.fire("Error", "Login failed", "error");
     },
     cacheTime: 3 * 24 * 60 * 60 * 1000,
   });
   const handleLogin = (data) => {
     loginMutation.mutate(data);
-    Swal.fire("Congratulation", "Login successfully", "success").then(() => {
-      console.log(data);
-    });
   };
   return (
     <div className="login" onSubmit={handleSubmit(handleLogin)}>
@@ -48,6 +51,7 @@ const Login = () => {
           label="username"
           type="text"
           register={register}
+          defaultValue="kminchelle"
           errors={errors}
           validate={{
             required: "Username is required",
@@ -63,6 +67,7 @@ const Login = () => {
           register={register}
           errors={errors}
           type="password"
+          defaultValue="0lelplR"
           validate={{
             required: "Password is required",
             minLength: {
