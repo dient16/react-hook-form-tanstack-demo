@@ -14,15 +14,15 @@ const Input = ({
   return (
     <div className="container">
       <input
-        className="floating-input"
+        className="input-text"
         id={id}
         type={type}
         disabled={disabled}
         {...register(id, validate)}
-        defaultValue={defaultValue}
+        value={defaultValue}
         placeholder=" "
       />
-      <label className="floating-label">
+      <label className="input-label">
         {label.charAt(0).toUpperCase() + label.slice(1)}
       </label>
       {errors[id] && (
