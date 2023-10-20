@@ -51,7 +51,6 @@ const Login = () => {
           label="username"
           type="text"
           register={register}
-          defaultValue="kminchelle"
           errors={errors}
           validate={{
             required: "Username is required",
@@ -67,7 +66,6 @@ const Login = () => {
           register={register}
           errors={errors}
           type="password"
-          defaultValue="0lelplR"
           validate={{
             required: "Password is required",
             minLength: {
