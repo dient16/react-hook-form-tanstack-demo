@@ -21,6 +21,7 @@ const Input = ({
         {...register(id, validate)}
         value={defaultValue}
         placeholder=" "
+        style={errors[id] && { border: "1px solid red" }}
       />
       <label className="input-label">
         {label.charAt(0).toUpperCase() + label.slice(1)}

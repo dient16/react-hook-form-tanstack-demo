@@ -4,11 +4,7 @@ import "./Login.css";
 import Button from "../Button/Buton";
 import Swal from "sweetalert2";
 import { useForm } from "react-hook-form";
-import {
-  useMutation,
-  queryClient,
-  useQueryClient,
-} from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { apiLogin } from "../../apis/auth";
 
 const Login = () => {
@@ -16,6 +12,7 @@ const Login = () => {
     handleSubmit,
     register,
     formState: { errors },
+    reset,
   } = useForm({
     defaultValues: {
       username: "",
@@ -23,24 +20,28 @@ const Login = () => {
     },
   });
   const loginMutation = useMutation(apiLogin, {
-    onSuccess: (data) => {
-      if (data) {
-        Swal.fire("Congratulation", "Login successfully", "success");
-      } else {
-        Swal.fire("Error", "Login failed", "error");
-      }
-      console.log("Login successful", data);
-      // localStorage.setItem("accessToken", data.token);
-    },
-
-    onError: (error) => {
-      console.error("Login failed", error);
-      Swal.fire("Error", "Login failed", "error");
-    },
-    cacheTime: 3 * 24 * 60 * 60 * 1000,
+    // cacheTime: 3 * 24 * 60 * 60 * 1000,
   });
   const handleLogin = (data) => {
-    loginMutation.mutate(data);
+    loginMutation.mutate(data, {
+      onSuccess: (data) => {
+        if (data) {
+          Swal.fire("Congratulation", "Login successfully", "success");
+          console.log("Login successful", data);
+          reset();
+        } else {
+          Swal.fire("Error", "Login failed", "error");
+          console.log("Login failed");
+        }
+
+        // localStorage.setItem("accessToken", data.token);
+      },
+
+      onError: (error) => {
+        console.error("Login failed", error);
+        Swal.fire("Error", "Login failed", "error");
+      },
+    });
   };
   return (
     <div className="login" onSubmit={handleSubmit(handleLogin)}>
@@ -75,6 +76,10 @@ const Login = () => {
           }}
         />
         <Button type="submit">Login</Button>
+        <br />
+        <small>username: kminchelle</small>
+        <br />
+        <small>password: 0lelplR</small>
       </form>
     </div>
   );
